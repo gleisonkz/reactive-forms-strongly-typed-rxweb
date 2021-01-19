@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { IFormBuilder, IFormGroup } from '@rxweb/types';
+import { Person } from './person.model';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +9,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'reactive-forms-strongly-typed-rxweb';
-  form: FormGroup;
+  title = 'reactive-forms-strongly-typed';
+  form: IFormGroup<Person>;
+  formBuilder: IFormBuilder;
+
+  constructor(fb: FormBuilder) {
+    this.formBuilder = fb;
+  }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
+    this.form = this.formBuilder.group<Person>({
+      name: ['', Validators.required],
+      age: [null, Validators.required],
     });
   }
 
