@@ -1,0 +1,5 @@
+.form-group-container {
+  mat-form-field + mat-form-field {
+    margin-left: 20px;
+  }
+}
