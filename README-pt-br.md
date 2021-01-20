@@ -59,7 +59,9 @@ Considerando que tenhamos o seguinte form criado abaixo com as propriedades name
 
   Para instalar as tipagem utilize o comando abaixo:
 
+  ```
   npm install @rxweb/types
+  ```
 
   Dessa forma agora poderemos utilizar 2 interfaces bastante interessantes que é a IFormGroup<T> e IFormBuilder onde no generics do IFormGroup poderemos passar uma interface ou type nosso, assim o type script saberá identificar as propriedades e também realizar a checagem dos tipos.
 
@@ -90,3 +92,7 @@ Considerando que tenhamos o seguinte form criado abaixo com as propriedades name
     ## Conclusão
 
     A melhor parte dessa abordagem é que o nosso form agora é fortemente tipado através de uma interface sem ter que alterar a estrutura da classe base do Angular.
+
+```
+
+```
