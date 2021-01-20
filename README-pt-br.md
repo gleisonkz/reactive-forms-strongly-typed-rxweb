@@ -17,17 +17,21 @@ Considerando que tenhamos o seguinte form criado abaixo com as propriedades name
 ![base-form](./.github/base-form.png)
 
 - Não possuir intellisense para as propriedades existentes no form.
+
   ![no-intellisense](./.github/no-intellisense.png)
 
   Aqui você percebe que ao acessar a propriedade controls do seu form (linha 29), você não possui o autocomplete das propriedades existentes e mesmo tentando acessar um propriedade que não existe (linha 28) você não terá nenhuma checagem por parte do typescript, ocorrendo o erro apenas em tempo de execução (que é uma maravilha quando encadeado com outros erros 😬).
 
 - Sem checagem de compatibilidade de tipos na atribuição de valores.
+
   ![no-type-check](./.github/no-type-check.png)
 
   Suponhamos que no caso da propriedade age quiséssemos restringir a atribuição a apenas valores do tipo number (linha 28), com o form padrão isso não é possível pois o método setValue da classe AbstractControl recebe como parâmetro uma propriedade value que é do typo any, portanto o typescript não sabe como realizar a checagem.
 
 - Não é possível definir uma estrutura para o form baseado em uma interface.
-  ![interface](./.github/no-type-check.png)
+
+  ![interface](./.github/interface.png)
+
   Caso quiséssemos ter uma interface que defina a estrutura do nosso form como essa acima.
 
   e que o nosso form seja validado de acordo com o tipo e as propriedades existentes nessa interface, dessa forma com qualquer alteração na interface o nosso form acusaria imediatamente a falta da mesma, com os forms nativos do Angular isso não é possível.
@@ -36,7 +40,7 @@ Considerando que tenhamos o seguinte form criado abaixo com as propriedades name
 
   Dentre as minhas pesquisas encontrei algumas bibliotecas que te entregam esse comportamento de forms tipados, porém algumas delas o próprio idealizador da biblioteca não manteve as atualizações e o projeto foi abandonado, diante dessa situação dependendo do projeto que estiver é meio arriscado se acoplar dessa forma a uma biblioteca externa.
 
-  Todos os pontos acima podem ser resolvidos, criando classes genéricas que estendem as classes básicas (FormGroup, FormControl e FormArray) que é o que algumas das bibliotecas que citei fazem. Mas ainda assim teriamos alguns problemas:
+  Todos os pontos acima podem ser resolvidos, criando classes genéricas que estendem as classes básicas (FormGroup, FormControl e FormArray) que é o que algumas das bibliotecas que citei fazem. Mas ainda assim teríamos alguns problemas:
 
   - Perder o principal beneficio da classe FormBuilder para criação de FormControl, FormGroup e FormArray de forma fácil.
   - Qualquer erro ocorrido na classe genérica irá provocar comportamentos inesperados na aplicação
@@ -64,18 +68,23 @@ Considerando que tenhamos o seguinte form criado abaixo com as propriedades name
   Dessa forma nós teremos todos aqueles pontos corrigidos e checados pelo typescript:
 
   - Intellisense para todas as propriedades existentes no form.
+
     ![with-intellisense](./.github/with-intellisense.png)
 
     como o form agora utiliza a interface IFormGroup<Person> sempre que acessarmos a propriedade controls do nosso form, nós teremos o intellisense.
 
   - Checagem de compatibilidade de tipos na atribuição de valores na criação e atualização do form.
+
     ![with-type-check-1](./.github/with-type-check-1.png)
+
     ![with-type-check-2](./.github/with-type-check-2.png)
 
     mesmo durante a criação dos controles do formulário ou mesmo na atualização de seus valores o typescript irá acusar erro caso o tipo atribuído seja incompatível.
 
   - Checagem das propriedades durante a criação do form.
+
     ![with-type-check-2](./.github/with-type-check-2.png)
+
     caso o formulário que esteja sendo criado não tenha as mesmas propriedades definidas na interface o typescript irá acusar a propriedade que está faltando.
 
     ## Conclusão
