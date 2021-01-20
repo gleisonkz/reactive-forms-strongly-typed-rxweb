@@ -83,7 +83,7 @@ Considerando que tenhamos o seguinte form criado abaixo com as propriedades name
 
   - Checagem das propriedades durante a criação do form.
 
-    ![with-check-properties](./.github/with-check-properties)
+    ![with-check-properties](./.github/with-check-properties.png)
 
     caso o formulário que esteja sendo criado não tenha as mesmas propriedades definidas na interface o typescript irá acusar a propriedade que está faltando.
 
