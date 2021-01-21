@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { IFormBuilder, IFormGroup } from '@rxweb/types';
 import { Person } from './person.model';
 
@@ -18,9 +18,9 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group<Person>({
-      name: ['', Validators.required],
-      age: [null, Validators.required],
+    this.formBuilder.group<Person>({
+      name: '',
+      age: 20,
     });
   }
 
